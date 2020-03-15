@@ -12,7 +12,8 @@ function saveName(text) {
 function handleSubmit(event){
     event.preventDefault();
     const currentValue = input.value;
-    console.log(currentValue);
+    paintGreeting(currentValue);
+    saveName(currentValue);
 }
 
 function askForName(){
@@ -23,20 +24,21 @@ function askForName(){
 function paintGreeting(text){
     form.classList.remove(SHOWING_CN);
     greeting.classList.add(SHOWING_CN);
-    greeting.innerText = 'Hello ${text}';
+    greeting.innerText = `Hello ${text}`;
 }
 
 function loadName(){
-    const currentUser = localStorage.getItem(USER_LS);
-    if(currentUser === null){
-
+  const currentUser = localStorage.getItem(USER_LS);
+  if(currentUser === null){
+    askForName();
     }else {
-        paintGreeting(currentUser);
-
+      paintGreeting(currentUser);
     }
 }
 
 
-function init() {}
+function init() {
+  loadName();
+}
 
 init();
